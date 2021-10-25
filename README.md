@@ -15,6 +15,6 @@ require('chartoggle').setup ({
 
 Press `<Localleader>key` = Toogle `key` end of line
 
-Example press `,,` to toogle `,` `, is <Localleader> here`
+Example press `,,` to toogle `,` [`, is <Localleader> here`]
 
 Thank you
