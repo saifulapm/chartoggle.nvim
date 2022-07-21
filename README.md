@@ -2,13 +2,22 @@
 
 Toogle comma(,), semicolon(;) or other character in neovim
 
-## usage
+## Requirements
+Neovim >= 0.5.0
 
+## Installation
+
+[packer.nvim]:
 ```lua
-require('chartoggle').setup ({
-  leader = '<localleader>', -- you can use any key as Leader
-  keys = {',', ';' } -- Which keys will be toggle end of the line
-})
+use {
+  'saifulapm/chartoggle.nvim',
+  config = function ()
+    require('chartoggle').setup ({
+      leader = '<localleader>', -- you can use any key as Leader
+      keys = {',', ';' } -- Which keys will be toggle end of the line
+    })
+  end
+}
 ```
 
 ## how it work
