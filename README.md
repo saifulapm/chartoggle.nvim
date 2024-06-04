@@ -24,10 +24,11 @@ use {
 ```lua
 {
   'saifulapm/chartoggle.nvim',
-  opt = {
+  opts = {
     leader = '<localleader>', -- you can use any key as Leader
     keys = {',', ';' } -- Which keys will be toggle end of the line
-  }
+  },
+  event = "VeryLazy"
 }
 ```
 
