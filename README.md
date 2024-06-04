@@ -1,34 +1,21 @@
 # chartoggle.nvim
 
-Toogle comma(,), semicolon(;) or other character in neovim
+Toogle comma(,), semicolon(;) or other character in neovim end of line from anywhere in the line
 
 ## Requirements
 Neovim >= 0.5.0
 
 ## Installation
 
-[packer.nvim]:
-```lua
-use {
-  'saifulapm/chartoggle.nvim',
-  config = function ()
-    require('chartoggle').setup ({
-      leader = '<localleader>', -- you can use any key as Leader
-      keys = {',', ';' } -- Which keys will be toggle end of the line
-    })
-  end
-}
-```
-
 [lazy.nvim]:
 ```lua
 {
   'saifulapm/chartoggle.nvim',
   opts = {
-    leader = '<localleader>', -- you can use any key as Leader
+    leader = '<LocalLeader>', -- you can use any key as Leader
     keys = {',', ';' } -- Which keys will be toggle end of the line
   },
-  event = "VeryLazy"
+  keys = {'<LocalLeader>,', '<LocalLeader>;'} -- Lazy loaded
 }
 ```
 

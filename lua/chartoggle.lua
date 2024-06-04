@@ -1,27 +1,40 @@
 local M = {}
 
-M.toggle = function (character)
+M.toggle = function(character)
   local api = vim.api
-  local delimiters = { ',', ';' }
   local line = api.nvim_get_current_line()
-  local last_char = line:sub(-1)
+  local commentstring = vim.api.nvim_get_option_value('commentstring', { buf = 0 }):gsub('%%s', '')
+  local escaped_commentstring = commentstring:gsub('([%(%)%.%%%+%-%*%?%[%^%$])', '%%%1')
+  local code, comment = line:match('^(.*)' .. escaped_commentstring .. '(.*)$')
 
-  if last_char == character then
-    return api.nvim_set_current_line(line:sub(1, #line - 1))
-  elseif vim.tbl_contains(delimiters, last_char) then
-    return api.nvim_set_current_line(line:sub(1, #line - 1) .. character)
+  if code then
+    code = code:gsub('%s*$', '') -- remove trailing spaces
+    local last_char = code:sub(-1)
+
+    if last_char == character then
+      code = code:sub(1, #code - 1)
+    else
+      code = code .. character
+    end
+
+    line = code .. ' ' .. commentstring .. (comment or '')
   else
-    return api.nvim_set_current_line(line .. character)
+    line = line:gsub('%s*$', '') -- remove trailing spaces
+    local last_char = line:sub(-1)
+
+    if last_char == character then
+      line = line:sub(1, #line - 1)
+    else
+      line = line .. character
+    end
   end
+
+  return api.nvim_set_current_line(line)
 end
 
-M.map = function(mode, target, source, opts)
-    vim.keymap.set(mode, target, source, opts)
-end
-
-M.setup = function (options)
+M.setup = function(options)
   for _, key in ipairs(options.keys) do
-    M.map('n', options.leader .. key, ':lua require("chartoggle").toggle("' .. key .. '")<CR>', { noremap = true, silent = true })
+    vim.keymap.set('n', options.leader .. key, function() M.toggle(key) end, { desc = 'Toggle ' .. key })
   end
 end
 
