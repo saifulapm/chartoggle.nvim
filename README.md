@@ -1,3 +1,9 @@
+# ⚠️ DEPRECATED
+
+This plugin has been renamed and moved to [commasemi.nvim](https://github.com/saifulapm/commasemi.nvim).
+
+Please use commasemi.nvim instead as this repository will no longer be maintained.
+
 # chartoggle.nvim
 
 Toogle comma(,), semicolon(;) or other character in neovim end of line from anywhere in the line
